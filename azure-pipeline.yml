@@ -18,3 +18,7 @@ steps:
       additionalVariables: |
         - fromParameter1: ${{ parameters.parameter1 }}
         - fromParameter2: ${{ parameters.parameter2 }}
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)/**/*.json'
+      artifactName: template
