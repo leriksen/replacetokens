@@ -1,0 +1,20 @@
+trigger: none
+
+parameters:
+  - name: parameter1
+    type: string
+  - name: parameter2
+    type: string
+steps:
+  - task: replacetokens@5
+    displayName: replace tokens
+    inputs:
+      targetFiles:     '**/*.json'
+      tokenPattern:    doublebraces
+      verbosity:       detailed
+      actionOnMissing: fail
+      keepToken:       true
+      actionOnNoFiles: fail
+      additionalVariables: |
+        - fromParameter1: ${{ parameters.parameter1 }}
+        - fromParameter2: ${{ parameters.parameter2 }}
