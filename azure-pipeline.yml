@@ -9,12 +9,13 @@ steps:
   - task: replacetokens@5
     displayName: replace tokens
     inputs:
-      targetFiles:     '**/*.json'
-      tokenPattern:    doublebraces
-      verbosity:       detailed
-      actionOnMissing: fail
-      keepToken:       true
-      actionOnNoFiles: fail
+      targetFiles:                '**/*.json'
+      tokenPattern:               doublebraces
+      verbosity:                  detailed
+      actionOnMissing:            fail
+      keepToken:                  true
+      actionOnNoFiles:            fail
+      useAdditionalVariablesOnly: true
       inlineVariables: |
         fromParameter1: ${{ parameters.parameter1 }}
         fromParameter2: ${{ parameters.parameter2 }}
