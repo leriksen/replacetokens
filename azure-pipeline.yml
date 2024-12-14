@@ -25,10 +25,10 @@ steps:
       keepToken:                  true
       actionOnNoFiles:            fail
       useAdditionalVariablesOnly: true
-      inlineVariables: |
-        fromParameter1: ${{ parameters.parameter1 }}
-        fromParameter2: ${{ parameters.parameter2 }}
-        fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+      inlineVariables:
+        - fromParameter1: ${{ parameters.parameter1 }}
+        - fromParameter2: ${{ parameters.parameter2 }}
+        - fromParameter3: ${{ convertToJson(parameters.parameter3) }}
 
   - task: PublishPipelineArtifact@1
     inputs:
