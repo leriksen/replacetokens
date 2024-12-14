@@ -5,6 +5,10 @@ parameters:
     type: string
   - name: parameter2
     type: string
+  - name: parameter3
+    type: object
+    default: []
+
 steps:
   - task: replacetokens@5
     displayName: replace tokens
@@ -19,6 +23,8 @@ steps:
       inlineVariables: |
         fromParameter1: ${{ parameters.parameter1 }}
         fromParameter2: ${{ parameters.parameter2 }}
+        fromArrayParameter: ${{ convertToJson(parameters.parameter3) }}
+
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: '$(Build.SourcesDirectory)/template.json'

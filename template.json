@@ -1,4 +1,5 @@
 {
-  "fromParameter1": "{{fromParameter1}}",
-  "fromParameter2": "{{fromParameter2}}"
+  "fromParameter1": "{{ fromParameter1 }}",
+  "fromParameter2": "{{ fromParameter2 }}",
+  "simpleArray": {{ fromArrayParameter }}
 }
