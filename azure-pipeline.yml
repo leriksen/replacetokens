@@ -10,6 +10,8 @@ parameters:
     default: []
 
 steps:
+  - script: echo "${{ convertToJson(parameters.parameter3) }}"
+
   - task: replacetokens@5
     displayName: replace tokens
     inputs:
