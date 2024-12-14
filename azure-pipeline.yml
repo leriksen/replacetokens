@@ -12,23 +12,35 @@ parameters:
     type: object
     default: []
 
+variables:
+  fromParameter1: ${{ parameters.parameter1 }}
+  fromParameter2: ${{ parameters.parameter2 }}
+  fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+
 steps:
   - script: echo "${{ convertToJson(parameters.parameter3) }}"
 
-  - task: replacetokens@5
-    displayName: replace tokens
+  - task: FileTransform@1
+    displayName: File transformation template.json
     inputs:
-      targetFiles:                '**/*.json'
-      tokenPattern:               doublebraces
-      verbosity:                  detailed
-      actionOnMissing:            fail
-      keepToken:                  true
-      actionOnNoFiles:            fail
-      useAdditionalVariablesOnly: true
-      inlineVariables: |-
-        fromParameter1: ${{ parameters.parameter1 }}
-        fromParameter2: ${{ parameters.parameter2 }}
-        fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+      folderPath: $(Build.SourcesDirectory)
+      targetFiles: template.json
+      fileType: json
+
+#  - task: replacetokens@5
+#    displayName: replace tokens
+#    inputs:
+#      targetFiles:                '**/*.json'
+#      tokenPattern:               doublebraces
+#      verbosity:                  detailed
+#      actionOnMissing:            fail
+#      keepToken:                  true
+#      actionOnNoFiles:            fail
+#      useAdditionalVariablesOnly: true
+#      inlineVariables: |-
+#        fromParameter1: ${{ parameters.parameter1 }}
+#        fromParameter2: ${{ parameters.parameter2 }}
+#        fromParameter3: ${{ convertToJson(parameters.parameter3) }}
 
   - task: PublishPipelineArtifact@1
     inputs:
