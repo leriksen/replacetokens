@@ -15,7 +15,7 @@ parameters:
 variables:
   fromParameter1: ${{ parameters.parameter1 }}
   fromParameter2: ${{ parameters.parameter2 }}
-  fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+  fromParameter3: "${{ convertToJson(parameters.parameter3) }}"
 
 steps:
   - script: echo "${{ convertToJson(parameters.parameter3) }}"
@@ -46,3 +46,5 @@ steps:
     inputs:
       targetPath: '$(Build.SourcesDirectory)/template.json'
       artifactName: template
+
+  - script: cat template.json
