@@ -20,31 +20,31 @@ variables:
 steps:
   - script: echo "${{ convertToJson(parameters.parameter3) }}"
 
-  - task: FileTransform@1
-    displayName: File transformation template.json
-    inputs:
-      folderPath: $(Build.SourcesDirectory)
-      targetFiles: template.json
-      fileType: json
-
-#  - task: replacetokens@5
-#    displayName: replace tokens
+#  - task: FileTransform@1
+#    displayName: File transformation template.json
 #    inputs:
-#      targetFiles:                '**/*.json'
-#      tokenPattern:               doublebraces
-#      verbosity:                  detailed
-#      actionOnMissing:            fail
-#      keepToken:                  true
-#      actionOnNoFiles:            fail
-#      useAdditionalVariablesOnly: true
-#      inlineVariables: |-
-#        fromParameter1: ${{ parameters.parameter1 }}
-#        fromParameter2: ${{ parameters.parameter2 }}
-#        fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+#      folderPath: $(Build.SourcesDirectory)
+#      targetFiles: template.json
+#      fileType: json
 
-  - task: PublishPipelineArtifact@1
+  - task: replacetokens@5
+    displayName: replace tokens
     inputs:
-      targetPath: '$(Build.SourcesDirectory)/template.json'
-      artifactName: template
+      targetFiles:                '**/*.json'
+      tokenPattern:               doublebraces
+      verbosity:                  detailed
+      actionOnMissing:            fail
+      keepToken:                  true
+      actionOnNoFiles:            fail
+      useAdditionalVariablesOnly: true
+      inlineVariables: |-
+        fromParameter1: ${{ parameters.parameter1 }}
+        fromParameter2: ${{ parameters.parameter2 }}
+        fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+
+#  - task: PublishPipelineArtifact@1
+#    inputs:
+#      targetPath: '$(Build.SourcesDirectory)/template.json'
+#      artifactName: template
 
   - script: cat template.json
