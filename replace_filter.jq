@@ -1,0 +1,1 @@
+{"fruit": $jq_fruit_var, "colour": $ip_json, "size": .size}
