@@ -4,47 +4,21 @@ trigger:
 parameters:
   - name: parameter1
     type: string
-    default: defaultParameter1
+    default: Guava
   - name: parameter2
-    type: string
-    default: defaultParameter2
-  - name: parameter3
     type: object
     default: []
 
-variables:
-  fromParameter1: ${{ parameters.parameter1 }}
-  fromParameter2: ${{ parameters.parameter2 }}
-  fromParameter3: "${{ convertToJson(parameters.parameter3) }}"
-
 steps:
-  - script: echo "${{ convertToJson(parameters.parameter3) }}"
-
-#  - task: FileTransform@1
-#    displayName: File transformation template.json
-#    inputs:
-#      folderPath: $(Build.SourcesDirectory)
-#      targetFiles: template.json
-#      fileType: json
-
-  - task: replacetokens@5
-    displayName: replace tokens
+  - task: Bash@3
+    displayName: Run JQ replace
     inputs:
-      targetFiles:                '**/*.json'
-      tokenPattern:               doublebraces
-      verbosity:                  detailed
-      actionOnMissing:            fail
-      keepToken:                  true
-      actionOnNoFiles:            fail
-      useAdditionalVariablesOnly: true
-      inlineVariables: |-
-        fromParameter1: ${{ parameters.parameter1 }}
-        fromParameter2: ${{ parameters.parameter2 }}
-        fromParameter3: ${{ convertToJson(parameters.parameter3) }}
+      targetType: filePath
+      filePath: replace_fruit.sh
 
-#  - task: PublishPipelineArtifact@1
-#    inputs:
-#      targetPath: '$(Build.SourcesDirectory)/template.json'
-#      artifactName: template
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.SourcesDirectory)/replaced.json'
+      artifactName: replaced
 
-  - script: cat template.json
+  - script: cat replaced.json

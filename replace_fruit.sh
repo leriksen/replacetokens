@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-jq --arg jq_fruit_var "${bash_fruit_var}" --argjson ip_json "${bash_ip_var}" -f replace_filter.jq fruits_template.json
+jq --arg jq_fruit_var "${{ parameters.parameter1 }}" --argjson ip_json "${{ parameters.parameter2 }}" -f replace_filter.jq fruits_template.json > replaced.json
 
