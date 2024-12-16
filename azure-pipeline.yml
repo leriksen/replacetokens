@@ -13,8 +13,8 @@ steps:
   - task: Bash@3
     displayName: Run JQ replace
     env:
-      parameter1: "${{ parameters.parameter1 }}"
-      parameter2: "${{ parameters.parameter2 }}"
+      fruit: "${{ parameters.parameter1 }}"
+      ip: "${{ parameters.parameter2 }}"
     inputs:
       targetType: filePath
       filePath: replace_fruit.sh
