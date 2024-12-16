@@ -14,7 +14,7 @@ steps:
     displayName: Run JQ replace
     env:
       fruit: "${{ parameters.parameter1 }}"
-      ip: "${{ parameters.parameter2 }}"
+      ip: "${{ convertToJson(parameters.parameter2) }}"
     inputs:
       targetType: filePath
       filePath: replace_fruit.sh
